@@ -47,10 +47,10 @@ Make sure you have the following installed on your machine:
 
 **Cloning the Repository**
 
-bash
+```bash
 https://github.com/lleviackermann/Blogging.git
 cd Blogging
-
+```
 
 **Setting Up the Backend**
 
@@ -58,13 +58,14 @@ cd Blogging
 
 1. Navigate to the Backend  directory
    
-bash
+```bash
 cd server
+```
 
 
 2. Set up the ENV File
 
-
+```
 MONGO_USER=<MONGO_USER>             # Put MongoDB username here
 MONGO_PASSWORD=<MONGO_PASSWORD>     # Put MongoDB password here
 JWT_SECRET_KEY=<JWT_SECRET_KEY>     # Put JWT secret key here
@@ -72,20 +73,21 @@ JWT_SECRET_KEY=<JWT_SECRET_KEY>     # Put JWT secret key here
 CLOUD_NAME=<CLOUD_NAME>             # Put cloud service account name here
 API_KEY=<API_KEY>                   # Put cloud service API key here
 API_SECRET=<API_SECRET>             # Put cloud service API secret here
-
+```
 
 **Setting Up the Frontend**
    
 1. Navigate to the Frontend directory
 
+```
 cd client
-
+```
 
 **Installation**
 
 Install the required dependencies for both backend and frontend using npm:
 
-bash
+```bash
 # Backend
 cd server
 npm install
@@ -93,19 +95,21 @@ npm install
 # Frontend
 cd client
 npm install
+```
 
 
 
 **Running the Project**
 1. Start the backend server:
-bash
+```bash
 cd server
 npm run dev 
+```
 
 2. In a new terminal, start the frontend development server:
-bash
+```bash
 cd client
 npm run dev 
-  
+```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
