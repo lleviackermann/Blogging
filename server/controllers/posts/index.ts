@@ -8,10 +8,10 @@ import mongoose from 'mongoose';
 export const getPosts = async (req: any, res: Response) => {
     try {
         const currentUserId = req.id;  // Current user ID from the request
-        const userIdParam = req.params.author;  // Get the 'author' from the params (if provided)
+        const userIdParam = req.query.author;  // Get the 'author' from the params (if provided)
 
-        const pageLimit = parseInt(req.query.pageLimit || '10');
-        const pageNo = parseInt(req.query.pageNo || '1');
+        const pageLimit = parseInt(req.query.limit || '10');
+        const pageNo = parseInt(req.query.page || '1');
 
         // Construct the pipeline
         const pipeline: any[] = [
@@ -71,10 +71,11 @@ export const getPosts = async (req: any, res: Response) => {
 
         // Return the paginated posts
         res.status(200).json({
-            posts,
+            data: posts,
             totalPosts,
             currentPage: pageNo,
             totalPages: Math.ceil(totalPosts / pageLimit),
+            message: "Successfully Fetched Posts!"
         });
     } catch (error) {
         console.error('Error retrieving posts:', error);
@@ -85,30 +86,29 @@ export const getPosts = async (req: any, res: Response) => {
 
 export const createPost = async (req: any, res: Response) => {
     try {
-        const { title, bio } = req.body;
+        const { title, bio, image } = req.body;
         const userId = req.id;
 
         // Check if image file exists
         let cloudinaryResponse : any;
-        if (req.file) {
-            return res.status(400).json({ message: 'Image is required' });
-            cloudinaryResponse = await cloudinary.uploader.upload(req.file);
+        if (image) {
+            cloudinaryResponse = await cloudinary.uploader.upload(image);
         }
 
         const newPost = new Post({
             title,
             bio,
             image: cloudinaryResponse ? cloudinaryResponse.secure_url : "",
-            userId: new mongoose.Types.ObjectId(userId),
+            userId: userId,
             likes: 0
         });
 
         // Save post to database
-        await newPost.save();
+        const createdPost = await newPost.save();
 
         res.status(201).json({
             message: 'Post created successfully',
-            post: newPost
+            data: createdPost
         });
     } catch (error) {
         console.error('Error creating post:', error);

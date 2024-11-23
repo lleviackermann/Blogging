@@ -23,7 +23,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         setIsLoading(true)
         
         try {
-            const response = await axiosInstance.post("/auth/login", {email, password});
+            const response = await axiosInstance.post("/login", {email, password});
             router.replace("/");
         } catch (err: any) {
             console.log(err);

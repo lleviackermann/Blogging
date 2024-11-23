@@ -15,7 +15,7 @@ const PrimaryNavbar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await axiosInstance.get("/auth/logout");
+            const response = await axiosInstance.get("/logout");
             dispatch(userActions.reset());
             toast.toast({title: response.data.message});
         } catch (err: any) {
@@ -63,8 +63,8 @@ const PrimaryNavbar = () => {
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuItem className='cursor-pointer'>
-                            <Link href="/profile/cars">
-                                Your Cars
+                            <Link href="/dashboard">
+                                Dashboard
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={handleLogout} className='cursor-pointer'>Logout</DropdownMenuItem>

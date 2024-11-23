@@ -26,7 +26,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             setIsLoading(true)
 
             try {
-                const response = await axiosInstance.post("/auth/signup", {name, email, password});
+                const response = await axiosInstance.post("/signup", {name, email, password});
                 toast.toast({title: response.data.message});
                 router.replace("/login");
             } catch (err: any) {

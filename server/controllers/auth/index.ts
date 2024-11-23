@@ -60,6 +60,30 @@ export const login = async (req: Request, res: Response) => {
     }
 }
 
+export const boot = async (req: AuthRequest, res: Response) => {
+    const id = req.id;
+
+    if (!id) {
+        return res.status(400).json({message: "Bad Request"});
+    }
+
+    try {
+        const findUser = await user.findById(id).select("name email");
+        return res.status(200).json({message: "fetched boot data", data: findUser});
+    } catch (err) {
+        return res.status(500).json({message: "Something Went Wrong!"});
+    }
+}
+
+export const users = async (req: AuthRequest, res: Response) => {
+    try {
+        const fetchedUsers = await user.find({}).select("-password");
+        return res.status(200).json({data: fetchedUsers, message: "Successfully fetched users!"});
+    } catch (err) {
+        return res.status(500).json({message: "Something Went Wrong!"});
+    }
+}
+
 export const logout = async (req: AuthRequest, res: Response) => {
     res.clearCookie("JWT_HTTPONLY_Cookie");
     return res.status(200).json({message: "Logged Out Successfully!"});

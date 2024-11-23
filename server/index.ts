@@ -24,8 +24,10 @@ app.post("/signup", controllers.auth.signup);
 app.post("/login", controllers.auth.login);
 app.get("/logout", controllers.auth.logout);
 app.post("/post", verifyJWT, controllers.posts.createPost);
-app.get("/posts", verifyJWT, controllers.posts.getPosts);
+app.get("/posts/", verifyJWT, controllers.posts.getPosts);
 app.post("/posts/:postId/toggle-like", verifyJWT, controllers.posts.toggleLike);
+app.get("/boot", verifyJWT, controllers.auth.boot);
+app.get("/users", verifyJWT, controllers.auth.users);
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@kanban-cluster-0.5q9wq.mongodb.net/?retryWrites=true&w=majority&appName=kanban-cluster-0`).then(() => {
     console.log("database connected");

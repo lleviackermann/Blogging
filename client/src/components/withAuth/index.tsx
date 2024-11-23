@@ -14,7 +14,7 @@ const withAuth = (Component: any) => {
 
         const bootData = async () => {
             try {
-                const response = await axiosInstance.get("/auth/boot");
+                const response = await axiosInstance.get("/boot");
                 dispatch(userActions.setBootData({_id: response.data.data._id, name: response.data.data.name, email: response.data.data.email, isLoggedIn: true}));
             } catch (err) {
                 console.log(err);
